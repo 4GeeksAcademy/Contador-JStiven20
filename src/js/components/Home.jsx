@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-//include images into your bundle
-import Contador from "./Contador";
-
-//create your first component
+//creamos el primer componente
 const Home = () => {
+	//creamos un useState que se inicie en 0
+	const [seconds, setSeconds] = useState(0);
+
+	useEffect(() => {
+		setInterval(() => {
+			setSeconds(prevSecond => prevSecond + 1)
+		}, 1000);
+	}, [])
+
 	return (
 		<div className="text-center">
-			<Contador/ >
-
-            
-
+			<h2>Contador : {seconds}s</h2>
 		</div>
 	);
 };
