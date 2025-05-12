@@ -1,41 +1,39 @@
 import React, { useState } from "react";
 
 const Home = () => {
-	const [seconds, setSeconds] = useState(0); // Contador de segundos
-	const [isActive, setIsActive] = useState(false); // Estado para saber si el contador está activo
-	const [targetSeconds, setTargetSeconds] = useState(null); // Segundos objetivo
-	let intervalId = null; // Variable para guardar el intervalo
+	const [seconds, setSeconds] = useState(0);
+	const [isActive, setIsActive] = useState(false);
+	const [targetSeconds, setTargetSeconds] = useState(null);
+	let intervalId = null;
 
-	// Función para iniciar o detener el contador
+
 	const toggleCounter = () => {
 		if (isActive) {
-			clearInterval(intervalId); // Detener el intervalo
+			clearInterval(intervalId);
 		} else {
 			intervalId = setInterval(() => {
 				setSeconds((prev) => {
 					if (targetSeconds !== null && prev + 1 >= targetSeconds) {
-						clearInterval(intervalId); // Detener el contador si se alcanza el objetivo
-						setIsActive(false); // Cambiar el estado a inactivo
-						return targetSeconds; // Asegurar que no pase del objetivo
+						clearInterval(intervalId);
+						setIsActive(false);
+						return targetSeconds;
 					}
-					return prev + 1; // Incrementar el contador
+					return prev + 1;
 				});
 			}, 1000);
 		}
-		setIsActive(!isActive); // Cambiar el estado de activo/inactivo
+		setIsActive(!isActive);
 	};
 
-	// Función para reiniciar el contador
 	const resetCounter = () => {
-		clearInterval(intervalId); // Detener el intervalo
-		setSeconds(0); // Reiniciar el contador
-		setTargetSeconds(null); // Reiniciar el objetivo
-		setIsActive(false); // Cambiar el estado a inactivo
+		clearInterval(intervalId);
+		setSeconds(0);
+		setTargetSeconds(null);
+		setIsActive(false);
 	};
 
-	// Función para manejar el cambio en el input
 	const handleTargetChange = (e) => {
-		setTargetSeconds(Number(e.target.value)); // Guardar el objetivo
+		setTargetSeconds(Number(e.target.value));
 	};
 
 	return (
